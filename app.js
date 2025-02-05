@@ -8,7 +8,7 @@
 // Selecionando os elementos do DOM
 
 const nomeInput = document.getElementById("nome"); // Selecionar o campo da entrada do usuário
-const adicionarBotao = document.getElementById("adicionar"); // Selecionar o botao de adicionar
+const adicionarBtn = document.getElementById("adicionar"); // Selecionar o botao de adicionar
 const listaNomes = document.getElementById("lista-nomes"); // Selecionar o campo da lista de nomes
 
 let nomes = []; // Array para armazenar os nomes
@@ -41,5 +41,33 @@ function atualizarLista() {
 }
 
 // Evento de clique no botão Adicionar
+adicionarBtn.addEventListener("click", adicionarNome);
 
-adicionarBotao.addEventListener("click", adicionarNome);
+// 2. Implementar Sorteio Aleatório
+
+// O que será feito?
+// Criar uma função que sorteia um nome da lista.
+// Exibir o resultado na tela.
+// Impedir o sorteio caso a lista esteja vazia.
+
+// Selecionando o botão de sorteio e a área do resultado
+
+const sortearBtn = document.getElementById("sortear");
+const resultado = document.getElementById("resultado");
+let sorteio = false;
+
+// Funçao para realizar sorteio
+function sortearNome() {
+  if (nomes.length === 0) {
+    alert("A lista está vazia! Adicione pelo menos um nome.");
+    return;
+  }
+
+  const indiceSorteado = Math.floor(Math.random() * nomes.length);
+  const nomeSorteado = nomes[indiceSorteado];
+
+  resultado.textContent = `🎉 O amigo secreto sorteado é: ${nomeSorteado} 🎉`;
+}
+
+// Evento de clique no botão Sortear
+sortearBtn.addEventListener("click", sortearNome);
