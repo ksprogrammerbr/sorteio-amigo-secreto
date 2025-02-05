@@ -1,22 +1,15 @@
-// 1. Adicionar Nomes à Lista
-// O que será feito?
-// Criar um array para armazenar os nomes.
-// Capturar a entrada do usuário e adicionar o nome ao array.
-// Exibir os nomes na tela.
-// Impedir entradas vazias.
+// 1. Adicionar Nomes à Lista=
 
-// Selecionando os elementos do DOM
-
-const nomeInput = document.getElementById("nome"); // Selecionar o campo da entrada do usuário
-const adicionarBtn = document.getElementById("adicionar"); // Selecionar o botao de adicionar
-const listaNomes = document.getElementById("lista-nomes"); // Selecionar o campo da lista de nomes
+const inputName = document.getElementById("amigo"); // Selecionar o campo da entrada do usuário
+const adicionarBtn = document.querySelector(".button-add"); // Selecionar o botao de adicionar
+const listaNomes = document.getElementById("listaAmigos"); // Selecionar o campo da lista de nomes
 
 let nomes = []; // Array para armazenar os nomes
 
 // Função para adicionar um nome à lista
 
 function adicionarNome() {
-  const nome = nomeInput.value.trim(); // Pegar o valor do campo do usuário
+  const nome = inputName.value.trim(); // Pegar o valor do campo do usuário
 
   if (nome === "") {
     alert("Por favor, insira um nome válido.");
@@ -25,7 +18,7 @@ function adicionarNome() {
 
   nomes.push(nome);
   atualizarLista();
-  nomeInput.value = ""; // Limpar o campo de entrada
+  inputName.value = ""; // Limpar o campo de entrada
 }
 
 // Atualizar a exibição da lista
@@ -33,7 +26,7 @@ function adicionarNome() {
 function atualizarLista() {
   listaNomes.innerHTML = ""; // Limpar a lista antres de atualizar
 
-  nomes.forEach((nome, index) => {
+  nomes.forEach((nome) => {
     const item = document.createElement("li"); //  Cria um elemento <li>
     item.textContent = nome; // Define o texto do <li> como o nome do array
     listaNomes.appendChild(item); // Adiciona o <li> dentro da lista
@@ -45,16 +38,10 @@ adicionarBtn.addEventListener("click", adicionarNome);
 
 // 2. Implementar Sorteio Aleatório
 
-// O que será feito?
-// Criar uma função que sorteia um nome da lista.
-// Exibir o resultado na tela.
-// Impedir o sorteio caso a lista esteja vazia.
-
 // Selecionando o botão de sorteio e a área do resultado
 
-const sortearBtn = document.getElementById("sortear");
+const sortearBtn = document.querySelector(".button-draw");
 const resultado = document.getElementById("resultado");
-let sorteio = false;
 
 // Funçao para realizar sorteio
 function sortearNome() {
