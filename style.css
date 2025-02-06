@@ -1,11 +1,12 @@
 :root {
-  --color-primary: #c42152;
-  --color-secondary: #1be2d8;
+  --color-primary: #6c63ff;
+  --color-secondary: #fff9eb;
   --color-tertiary: #c4c4c4;
-  --color-button: #fe652b;
-  --color-button-hover: #e55720;
+  --color-button: #ff6b6b;
+  --color-button-hover: #ff8787;
   --color-text: #444444;
   --color-white: #ffffff;
+  --gradient-primary: linear-gradient(135deg, #6c63ff 0%, #4834d4 100%);
 }
 
 /* Estilos gerais */
@@ -17,12 +18,7 @@
 
 body {
   height: 100vh;
-  background: linear-gradient(
-    to right,
-    var(--color-primary),
-    var(--color-secondary)
-  );
-  background-color: var(--color-primary);
+  background: var(--gradient-primary);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,6 +29,7 @@ body {
   flex-direction: column;
   height: 100%;
   width: 100%;
+  position: relative;
 }
 
 /* Banner */
@@ -44,17 +41,28 @@ body {
   padding: 40px 0 0;
 }
 
+.header-banner img {
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease;
+}
+
+.header-banner img:hover {
+  transform: scale(1.05);
+}
+
 /* Seção de entrada */
 .input-section {
   flex: 60%;
   background-color: var(--color-secondary);
-  border: 1px solid #000;
-  border-radius: 64px 64px 0 0;
+  border: none;
+  border-radius: 40px 40px 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 30px;
   width: 100%;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 /* Títulos */
@@ -64,6 +72,7 @@ body {
   font-weight: 900;
   font-style: italic;
   color: var(--color-white);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .section-title {
@@ -86,27 +95,25 @@ body {
 
 .input-name {
   width: 100%;
-  padding: 10px;
-  border: 2px solid #000;
+  padding: 15px 20px;
+  border: 2px solid transparent;
   border-radius: 25px 0 0 25px;
   font-size: 16px;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.input-name:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background-color: var(--color-white);
 }
 
 .button-container {
   width: 300px;
   justify-content: center;
-}
-
-/* Estilos de entrada de texto */
-.input-title {
-  flex: 1;
-  padding: 10px 15px;
-  font-size: 16px;
-  border: 2px solid #333;
-  border-right: none;
-  border-radius: 25px 0 0 25px;
-  font-family: "Merriweather", serif;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
 }
 
 /* Estilos de botão */
@@ -114,20 +121,24 @@ button {
   padding: 15px 30px;
   font-family: "Inter", sans-serif;
   font-size: 16px;
-  border: 2px solid #000;
+  border: none;
   border-radius: 25px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .button-add {
-  background-color: var(--color-tertiary);
-  color: var(--color-text);
+  background-color: var(--color-primary);
+  color: var(--color-white);
   border-radius: 0 25px 25px 0;
+  padding: 15px 30px;
+  box-shadow: 0 4px 8px rgba(108, 99, 255, 0.2);
 }
 
 .button-add:hover {
-  background-color: #a1a1a1;
+  background-color: #5851db;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(108, 99, 255, 0.3);
 }
 
 /* Listas */
@@ -137,38 +148,114 @@ ul {
   font-family: "Inter", sans-serif;
   font-size: 18px;
   margin: 20px 0;
+  width: 100%;
+  max-width: 600px;
+}
+
+.name-list li {
+  background-color: #f8f9fa;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.name-list li:hover {
+  transform: translateX(5px);
 }
 
 .result-list {
   margin-top: 15px;
-  color: #540794;
+  background-color: rgba(5, 223, 5, 0.1);
+  padding: 20px;
+  border-radius: 15px;
+  color: #05df05;
   font-size: 22px;
   font-weight: bold;
   text-align: center;
+  animation: fadeIn 0.5s ease;
+  box-shadow: 0 4px 12px rgba(5, 223, 5, 0.2);
 }
 
-/* Botão de sortear título */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Botão de sortear */
 .button-draw {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
-  padding: 10px 40px;
+  padding: 15px 40px;
   color: var(--color-white);
-  background-color: var(--color-button);
-  font-size: 16px;
+  background: linear-gradient(45deg, var(--color-button) 0%, #ff8e53 100%);
+  font-size: 18px;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+  position: relative;
+  overflow: hidden;
 }
 
-.button-draw img {
-  margin-right: 40px;
+.button-draw::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.button-draw:hover::before {
+  left: 100%;
 }
 
 .button-draw:hover {
-  background-color: var(--color-button-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
 }
 
-.result-list {
-  font-size: 22px;
-  font-weight: bold;
-  text-align: center;
-  color: var(--color-text);
+.button-draw img {
+  margin-right: 15px;
+  transition: transform 0.3s ease;
+}
+
+.button-draw:hover img {
+  transform: rotate(360deg);
+}
+
+/* Animação de confete */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background-color: #f0f;
+  animation: confetti-fall 3s linear infinite;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-100%) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+  }
 }

@@ -1,130 +1,102 @@
-// Selecionar elementos
-const inputName = document.getElementById("amigo");
-const adicionarBtn = document.querySelector(".button-add");
-const listaNomes = document.getElementById("listaAmigos");
-const sortearBtn = document.querySelector(".button-draw");
-const resultado = document.getElementById("resultado");
-const audio = new Audio("assets/sorteio.mp3");
+// Array para armazenar os nomes dos amigos
+let amigos = [];
 
-let nomes = JSON.parse(localStorage.getItem("nomes")) || [];
+// Função para adicionar amigo à lista
+function adicionarAmigo() {
+  // Pegar o valor do input
+  const input = document.getElementById("amigo");
+  const nome = input.value.trim();
 
-// Atualizar a lista ao carregar a página
-atualizarLista();
-
-// Função para adicionar nome
-function adicionarNome() {
-  const nome = inputName.value.trim();
+  // Validar se o campo está vazio
   if (nome === "") {
-    alert("Por favor, insira um nome válido.");
+    alert("Por favor, digite um nome válido!");
     return;
   }
 
-  if (nomes.includes(nome)) {
-    alert("Esse nome já foi adicionado, Por favor! Insira outro nome");
-    return;
-  }
+  // Adicionar o nome ao array
+  amigos.push(nome);
 
-  nomes.push(nome);
-  localStorage.setItem("nomes", JSON.stringify(nomes)); // Salvar localmente
-  atualizarLista();
-  inputName.value = "";
+  // Limpar o input
+  input.value = "";
+
+  // Atualizar a lista na tela
+  atualizarListaAmigos();
 }
 
-// Atualizar lista de nomes
-function atualizarLista() {
-  listaNomes.innerHTML = "";
-  nomes.forEach((nome, index) => {
-    const item = document.createElement("li");
-    item.textContent = nome;
+// Função para atualizar a lista de amigos na tela
+function atualizarListaAmigos() {
+  const lista = document.getElementById("listaAmigos");
+  lista.innerHTML = "";
 
-    // Botão para remover nome
-    const btnRemover = document.createElement("button");
-    btnRemover.textContent = "❌";
-    btnRemover.classList.add("remove-btn");
-    btnRemover.addEventListener("click", () => removerNome(index));
-
-    item.appendChild(btnRemover);
-    listaNomes.appendChild(item);
+  // Criar um item de lista para cada amigo
+  amigos.forEach((amigo) => {
+    const li = document.createElement("li");
+    li.textContent = amigo;
+    lista.appendChild(li);
   });
 }
 
-// Remover nome da lista
-function removerNome(index) {
-  nomes.splice(index, 1);
-  localStorage.setItem("nomes", JSON.stringify(nomes));
-  atualizarLista();
-}
+// Função para disparar o efeito de confete
+function dispararConfete() {
+  const config = {
+    particleCount: 100,
+    spread: 70,
+    origin: { y: 0.6 },
+    colors: ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff"],
+  };
 
-// **NOVO EFEITO DE CONFETE**
-function confettiEffect() {
-  const duration = 3 * 1000; // Tempo total do efeito
-  const animationEnd = Date.now() + duration;
-  const colors = [
-    "#ff0000",
-    "#00ff00",
-    "#0000ff",
-    "#ffff00",
-    "#ff00ff",
-    "#00ffff",
-  ];
+  confetti(config);
 
-  function frame() {
-    const timeLeft = animationEnd - Date.now();
-
-    if (timeLeft <= 0) {
-      return;
-    }
-
+  // Dispara mais confetes após um pequeno delay para criar um efeito mais duradouro
+  setTimeout(() => {
     confetti({
-      particleCount: 7,
-      angle: Math.random() * 360,
-      spread: 80,
-      startVelocity: 30,
-      colors: colors,
-      origin: { x: Math.random(), y: Math.random() - 0.2 },
+      ...config,
+      particleCount: 50,
+      origin: { y: 0.7 },
     });
-
-    requestAnimationFrame(frame);
-  }
-
-  frame();
+  }, 250);
 }
 
-// **Animação de suspense para o sorteio**
-function animateDraw(callback) {
-  let i = 0;
-  let interval = setInterval(() => {
-    resultado.innerHTML = `🎲 Sorteando: ${nomes[i % nomes.length]} 🎲`;
-    i++;
-    if (i > nomes.length * 2) {
-      clearInterval(interval);
-      callback();
-    }
-  }, 150);
-}
-
-// **Função de sorteio**
-function sortearNome() {
-  if (nomes.length < 2) {
-    alert("Adicione pelo menos dois nomes para sortear.");
+// Função para sortear um amigo
+function sortearAmigo() {
+  // Verificar se há amigos suficientes para sortear
+  if (amigos.length < 2) {
+    alert("Adicione pelo menos 2 amigos para realizar o sorteio!");
     return;
   }
 
-  audio.play();
-  animateDraw(() => {
-    const indiceSorteado = Math.floor(Math.random() * nomes.length);
-    const nomeSorteado = nomes[indiceSorteado];
+  // Gerar um índice aleatório
+  const indiceAleatorio = Math.floor(Math.random() * amigos.length);
 
-    resultado.innerHTML = `🎉 O amigo secreto sorteado é: ${nomeSorteado} 🎉`;
+  // Pegar o amigo sorteado
+  const amigoSorteado = amigos[indiceAleatorio];
 
-    // Chamar o efeito de confete somente após o resultado ser exibido
-    confettiEffect();
-  });
+  // Limpar resultado anterior
+  const resultado = document.getElementById("resultado");
+  resultado.innerHTML = "";
+
+  // Criar efeito de suspense
+  let dots = "";
+  let count = 0;
+  const suspense = setInterval(() => {
+    dots += ".";
+    if (dots.length > 3) dots = "";
+    resultado.innerHTML = `<li>Sorteando${dots}</li>`;
+    count++;
+
+    if (count >= 5) {
+      clearInterval(suspense);
+      // Exibir o resultado com animação
+      resultado.innerHTML = `<li>🎉 ${amigoSorteado} foi sorteado(a)! 🎉</li>`;
+      // Disparar confete
+      dispararConfete();
+    }
+  }, 500);
 }
 
-// Eventos
-adicionarBtn.addEventListener("click", adicionarNome);
-sortearBtn.addEventListener("click", sortearNome);
-inputName.addEventListener("keypress", (event) => {
-  if (event.key === "Enter") adicionarNome();
+// Adicionar evento de tecla Enter no input
+document.getElementById("amigo").addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    adicionarAmigo();
+  }
 });
