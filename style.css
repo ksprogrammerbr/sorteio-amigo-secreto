@@ -1,5 +1,5 @@
 :root {
-  --color-primary: #490c99;
+  --color-primary: #caaaf3;
   --color-secondary: #ebdec2;
   --color-tertiary: #c4c4c4;
   --color-button: #8e3ceb;
@@ -17,31 +17,59 @@
 }
 
 body {
-  height: 100vh;
+  min-height: 100vh; /* Adicione isso */
+  margin: 0;
   background: var(--gradient-primary);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-family: "Inter", sans-serif;
+  color: var(--color-text);
+  overflow-y: auto; /* Adicione isso */
+  overflow-x: hidden; /* esconde as barras de rolagem */
 }
 
+/* Estilos para o wrapper do conteúdo principal */
+.main-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Alinhar o conteúdo ao topo */
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+  /* Aumenta o z-index para ficar acima do fundo */
+  max-width: 900px; /* Adicione um max-width */
+  margin: 0 auto;
+}
+
+/* Estilos para o conteúdo principal */
 .main-content {
   display: flex;
   flex-direction: column;
-  height: 100%;
   width: 100%;
+  max-width: 800px;
+  border-radius: 30px;
+  overflow: hidden;
+  background-color: rgba(235, 222, 194, 0.3);
+  /* Altere a transparência conforme necessário */
+
+  backdrop-filter: blur(15px); /* Adiciona o efeito de blur */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   position: relative;
+  z-index: 3; /* Z-index ainda maior */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.952), 0 0 50px rgba(73, 12, 153, 0.5);
+  border: 1px solid rgba(10, 201, 235, 0.966); /* Borda suave */
 }
 
 /* Banner */
 .header-banner {
-  flex: 40%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 0 0;
+  padding: 40px 20px 0;
+  text-align: center;
 }
 
 .header-banner img {
+  max-width: 100%;
+  height: auto;
   filter: drop-shadow(0 4px 12px rgba(169, 20, 189, 0.2));
   transition: transform 0.3s ease;
 }
@@ -52,17 +80,12 @@ body {
 
 /* Seção de entrada */
 .input-section {
-  flex: 60%;
-  background-color: var(--color-secondary);
-  border: none;
-  border-radius: 40px 40px 0 0;
+  padding: 30px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px;
-  width: 100%;
-  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
-  position: relative;
+  overflow: hidden; /* Adicione isso */
 }
 
 /* Títulos */
@@ -73,14 +96,14 @@ body {
   font-style: italic;
   color: var(--color-white);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
 }
 
 .section-title {
-  font-family: "Inter", serif;
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 700;
   color: var(--color-primary);
-  margin: 10px 0;
+  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -88,32 +111,33 @@ body {
 .input-wrapper {
   display: flex;
   justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
   width: 100%;
-  max-width: 600px;
-  margin-top: 20px;
+  max-width: 100%;
 }
 
+/* Estilos para os campos de entrada de nome e senha */
 .input-name {
-  width: 100%;
-  padding: 15px 20px;
+  width: 100%; /* Ocupa toda a largura disponível */
+  max-width: none; /* Remove a largura máxima */
+  min-width: 0; /* Garante que o elemento possa encolher abaixo de seu tamanho natural */
+  flex-grow: 1; /* Permite que os elementos se expandam e preencham o espaço disponível */
+  padding: 15px;
   border: 2px solid transparent;
-  border-radius: 25px 0 0 25px;
+  border-radius: 25px;
   font-size: 16px;
   background-color: #f8f9fa;
   transition: all 0.3s ease;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-right: 10px; /* Adiciona uma margem entre os campos e o botão */
+  box-sizing: border-box;
 }
 
 .input-name:focus {
   outline: none;
   border-color: var(--color-primary);
   background-color: var(--color-white);
-}
-
-.button-container {
-  width: 300px;
-  justify-content: center;
-  margin-top: 20px;
 }
 
 /* Estilos de botão */
@@ -130,13 +154,13 @@ button {
 .button-add {
   background-color: var(--color-primary);
   color: var(--color-white);
-  border-radius: 0 25px 25px 0;
+  border-radius: 25px;
   padding: 15px 30px;
-  box-shadow: 0 4px 8px rgba(108, 99, 255, 0.2);
+  box-shadow: 0 4px 8px rgba(70, 3, 146, 0.692);
 }
 
 .button-add:hover {
-  background-color: #5851db;
+  background-color: #2eb0e4;
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(108, 99, 255, 0.3);
 }
@@ -145,15 +169,19 @@ button {
 ul {
   list-style-type: none;
   color: var(--color-text);
-  font-family: "Inter", sans-serif;
   font-size: 18px;
-  margin: 20px 0;
+  margin-bottom: 20px;
   width: 100%;
-  max-width: 600px;
+  padding: 0;
+  box-sizing: border-box;
+  max-height: 200px; /* Ajuste a altura máxima conforme necessário */
+  overflow-y: auto; /* Adiciona a rolagem vertical quando necessário */
+  overflow-x: hidden;
+  padding-right: 5px; /* Garante que a barra de rolagem não cubra o texto */
 }
 
 .name-list li {
-  background-color: #f8f9fa;
+  background-color: #e2cee7;
   padding: 12px 20px;
   margin: 8px 0;
   border-radius: 12px;
@@ -168,44 +196,22 @@ ul {
   transform: translateX(5px);
 }
 
-.result-list {
-  margin-top: 15px;
-  background-color: rgba(5, 223, 5, 0.1);
-  padding: 20px;
-  border-radius: 15px;
-  color: #05df05;
-  font-size: 22px;
-  font-weight: bold;
-  text-align: center;
-  animation: fadeIn 0.5s ease;
-  box-shadow: 0 4px 12px rgba(146, 45, 240, 0.2);
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* Botão de sortear */
 .button-draw {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 15px 40px;
+  padding: 15px 30px;
   color: var(--color-white);
-  background: linear-gradient(45deg, var(--color-button) 0%, #ff8e53 100%);
+  background: linear-gradient(45deg, var(--color-button) 0%, #6cc0e0be 100%);
   font-size: 18px;
   font-weight: 600;
-  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.842);
   position: relative;
   overflow: hidden;
+  margin-bottom: 10px;
+  box-sizing: border-box;
 }
 
 .button-draw::before {
@@ -230,7 +236,7 @@ ul {
 
 .button-draw:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+  box-shadow: 0 6px 20px rgba(231, 236, 236, 0.562);
 }
 
 .button-draw img {
@@ -242,7 +248,44 @@ ul {
   transform: rotate(360deg);
 }
 
-/* Animação de confete */
+/* Estilos para a animação de "Sorteando..." */
+.sorteando-container {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.2); /* Fundo transparente */
+  backdrop-filter: blur(10px); /* Efeito de blur */
+  padding: 40px; /* Aumenta o tamanho da caixa */
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  text-align: center;
+  font-size: 1.2em; /* Aumenta a fonte */
+}
+
+#sorteandoTexto {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--color-primary);
+  animation: pulse 1.5s infinite alternate;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* Estilos para a animação de confete */
 .confetti {
   position: fixed;
   width: 10px;
@@ -255,6 +298,7 @@ ul {
   0% {
     transform: translateY(-100%) rotate(0deg);
   }
+
   100% {
     transform: translateY(100vh) rotate(360deg);
   }
@@ -262,98 +306,142 @@ ul {
 
 .piscar {
   animation: piscar 1s infinite;
-  font-size: 2.2em; /* Aumenta o tamanho do texto */
+  font-size: 2.2em;
 }
 
 @keyframes piscar {
   0% {
     opacity: 1;
   }
+
   50% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
 }
 
-#sortearNovamente {
-  /* Estilos para o botão Sortear Novamente, se necessário */
-  margin-top: 10px; /* Adiciona um pouco de espaço acima do botão */
-}
-
-.historico {
-  margin-top: 20px; /* Espaço acima da seção de histórico */
-}
-
-.historico ul {
-  list-style: none; /* Remove os bullets da lista */
-  padding: 0;
-}
-
-.historico li {
-  margin-bottom: 5px; /* Espaço entre os nomes no histórico */
-}
-
-/* Estilos para o popup */
-.popup-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; /* Garante que o popup fique na frente de outros elementos */
-}
-
-.popup-content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  position: relative;
+.result-list {
   text-align: center;
-  width: 80%;
-  max-width: 500px;
-  background: linear-gradient(135deg, #e094f0, #13b5dd); /* Gradiente suave */
-  transition: transform 0.8s ease; /* Adiciona uma transição suave */
+  font-size: 1.5em;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 20px;
 }
 
-.popup-content:hover {
-  transform: scale(1.05); /* Efeito de "aumento" no hover */
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 20px;
-  cursor: pointer;
-  color: #555;
-  transition: color 0.3s ease;
-}
-
-.close-btn:hover {
-  color: #000;
-}
-
-.popup-content p {
-  font-size: 1.2em;
-  color: #333;
-}
-
-/* Estilos para o container */
-.container {
-  position: relative;
-  overflow: hidden; /* Garante que o confete não vaze para fora */
-}
-
-/* Estilos para o espaçamento dos botões */
+/* Estilos para o container dos botões */
 .button-container {
   display: flex;
-  flex-direction: column; /* Coloca os botões em coluna */
-  gap: 10px; /* Adiciona um espaço de 10px entre os botões */
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+/* Estilos para o formulário de verificação */
+.verification-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
+  box-sizing: border-box;
+}
+
+.verification-form label,
+.verification-form input,
+.verification-form button {
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.verification-form label {
+  font-weight: bold;
+  color: var(--color-primary);
+  text-align: left;
+}
+
+#verificationForm {
+  display: none;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .main-title {
+    font-size: 36px;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .input-wrapper {
+    flex-direction: column;
+  }
+
+  .input-name {
+    max-width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .header-banner {
+    padding-top: 20px;
+  }
+}
+
+/* Estilos para o background animado */
+.bg {
+  animation: slide 3s ease-in-out infinite alternate;
+  background-image: linear-gradient(-60deg, #6c3483 50%, #5b2c6f 50%);
+  bottom: 0;
+  left: -50%;
+  opacity: 0.5;
+  position: fixed;
+  right: -50%;
+  top: 0;
+  z-index: 1;
+}
+
+.bg2 {
+  animation-direction: alternate-reverse;
+  animation-duration: 4s;
+  z-index: 1;
+}
+
+.bg3 {
+  animation-duration: 5s;
+  z-index: 1;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-25%);
+  }
+
+  100% {
+    transform: translateX(25%);
+  }
+}
+
+.btnRemover {
+  background-color: var(--color-button);
+  color: var(--color-white);
+  border-radius: 25px;
+  padding: 15px 30px;
+  box-shadow: 0 4px 8px rgba(108, 99, 255, 0.2);
+  border: none;
+}
+
+.name-list li button {
+  margin-left: 10px;
 }

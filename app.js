@@ -3,10 +3,10 @@ let amigos = [];
 let historicoSorteios = [];
 let audioSuspense;
 let audioCelebracao;
+let confettiInterval;
 
 // Configurações
 const volumeMensagemFalada = 2.0; // Ajuste o volume aqui
-let confettiInterval; // Variável para armazenar o intervalo do confete
 
 // Função para inicializar os sons
 function inicializarSons() {
@@ -18,11 +18,18 @@ function inicializarSons() {
 
 // Função para adicionar amigo à lista
 function adicionarAmigo() {
-  const input = document.getElementById("amigo");
-  const nome = input.value.trim();
+  const nomeInput = document.getElementById("amigo");
+  const senhaInput = document.getElementById("senha");
+  const nome = nomeInput.value.trim();
+  const senha = senhaInput.value.trim();
 
   if (nome === "") {
     alert("Por favor, digite um nome válido!");
+    return;
+  }
+
+  if (senha === "") {
+    alert("Por favor, digite uma senha válida!");
     return;
   }
 
@@ -32,13 +39,23 @@ function adicionarAmigo() {
     return;
   }
 
-  if (amigos.includes(nome)) {
+  if (amigos.some((amigo) => amigo.nome === nome)) {
     alert("Este nome já foi adicionado!");
     return;
   }
 
-  amigos.push(nome);
-  input.value = "";
+  // Verifica se a senha já foi utilizada
+  if (amigos.some((amigo) => amigo.senha === senha)) {
+    alert("Esta senha já foi utilizada. Por favor, escolha outra.");
+    return;
+  }
+
+  amigos.push({
+    nome: nome,
+    senha: senha,
+  });
+  nomeInput.value = "";
+  senhaInput.value = "";
   atualizarListaAmigos();
 }
 
@@ -49,7 +66,7 @@ function atualizarListaAmigos() {
 
   amigos.forEach((amigo, index) => {
     const li = document.createElement("li");
-    li.textContent = amigo;
+    li.textContent = amigo.nome;
 
     const btnRemover = document.createElement("button");
     btnRemover.textContent = "Remover";
@@ -71,7 +88,9 @@ function dispararConfete() {
   const config = {
     particleCount: 100,
     spread: 70,
-    origin: { y: 0.6 },
+    origin: {
+      y: 0.6,
+    },
     colors: ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff"],
   };
 
@@ -81,7 +100,9 @@ function dispararConfete() {
     confetti({
       ...config,
       particleCount: 50,
-      origin: { y: 0.7 },
+      origin: {
+        y: 0.7,
+      },
     });
   }, 250);
 }
@@ -93,7 +114,9 @@ function iniciarConfettiBackground() {
     confetti({
       particleCount: 20,
       spread: 70,
-      origin: { y: 0.6 },
+      origin: {
+        y: 0.6,
+      },
       colors: [
         "#ff0000",
         "#00ff00",
@@ -122,84 +145,176 @@ function sortearAmigo() {
 
   document.getElementById("sortear").disabled = true;
 
+  // Exibe a caixa de "Sorteando..." imediatamente
+  const sorteandoContainer = document.getElementById("sorteandoContainer");
+  sorteandoContainer.style.display = "block";
+
   let contador = 3;
   const resultado = document.getElementById("resultado");
-  resultado.innerHTML = `<li>Sorteando em ${contador}...</li>`;
+  resultado.innerHTML = ``;
 
   const countdownInterval = setInterval(() => {
     contador--;
     if (contador > 0) {
-      resultado.innerHTML = `<li>Sorteando em ${contador}...</li>`;
+      resultado.innerHTML = ``;
     } else {
-      resultado.innerHTML = "<li>Sorteando...</li>";
+      resultado.innerHTML = ``;
       clearInterval(countdownInterval);
-      realizarSorteio(resultado);
+      realizarSorteio();
     }
   }, 1000);
 }
 
-function realizarSorteio(resultado) {
-  const indiceAleatorio = Math.floor(Math.random() * amigos.length);
-  const amigoSorteado = amigos[indiceAleatorio];
-  const sorteadoPara = amigos[(indiceAleatorio + 1) % amigos.length];
+function realizarSorteio() {
+  if (amigos.length < 2) {
+    alert("Adicione pelo menos 2 amigos para realizar o sorteio!");
+    return;
+  }
 
-  // Armazenar o sorteio no "banco de dados" local
-  armazenarSorteio(amigoSorteado, sorteadoPara);
+  const sorteandoContainer = document.getElementById("sorteandoContainer");
+  const sorteandoTexto = document.getElementById("sorteandoTexto");
+  const listaResultados = document.getElementById("listaResultados");
 
-  historicoSorteios.push({ de: amigoSorteado, para: sorteadoPara });
+  // Verifique se os elementos existem antes de tentar modificar seus estilos
+  if (!sorteandoContainer || !sorteandoTexto || !listaResultados) {
+    console.error("Um ou mais elementos não foram encontrados!");
+    return; // Aborta a função se algum elemento não existir
+  }
+
+  // Mostra o container "Sorteando..."
+  sorteandoContainer.style.display = "block";
+  listaResultados.style.display = "none";
+
+  let amigosDisponiveis = [...amigos]; // Cria uma cópia do array de amigos para o sorteio
+  let novosSorteios = []; // Array para armazenar os novos sorteios
+
+  // Garante que cada amigo seja sorteado apenas uma vez e não tire ele mesmo
+  for (let i = 0; i < amigos.length; i++) {
+    const amigoSorteado = amigos[i];
+    let opcoesParaSortear = amigosDisponiveis.filter(
+      (amigo) => amigo.nome !== amigoSorteado.nome
+    );
+
+    // Verifica se há opções para sortear
+    if (opcoesParaSortear.length === 0) {
+      console.error("Não foi possível sortear! Não há opções disponíveis.");
+      sorteandoContainer.style.display = "none"; // Esconde a mensagem "Sorteando..."
+      document.getElementById("sortear").disabled = false; // Reabilita o botão "Sortear"
+      return;
+    }
+
+    const indiceAleatorio = Math.floor(
+      Math.random() * opcoesParaSortear.length
+    );
+
+    // Adicione esta verificação
+    if (opcoesParaSortear[indiceAleatorio] === undefined) {
+      console.error("Erro: indiceAleatorio selecionou um valor undefined.");
+      return;
+    }
+
+    const sorteadoPara = opcoesParaSortear[indiceAleatorio];
+
+    novosSorteios.push({
+      de: amigoSorteado.nome,
+      para: sorteadoPara.nome,
+    });
+
+    // Remove o amigo sorteado para evitar que ele seja sorteado novamente
+    amigosDisponiveis = amigosDisponiveis.filter(
+      (amigo) => amigo.nome !== sorteadoPara.nome
+    );
+  }
+
+  // Atualiza o histórico de sorteios
+  historicoSorteios = novosSorteios;
 
   if (audioSuspense) {
     audioSuspense.play();
   }
-
-  resultado.innerHTML = "";
 
   let dots = "";
   let count = 0;
   const suspense = setInterval(() => {
     dots += ".";
     if (dots.length > 3) dots = "";
-    resultado.innerHTML = `<li>Sorteando${dots}</li>`;
+    sorteandoTexto.innerHTML = `Sorteando${dots}`;
     count++;
 
     if (count >= 5) {
       clearInterval(suspense);
-      resultado.innerHTML = `<li id="amigoSorteado">🎉 ${amigoSorteado} -> ${sorteadoPara}! 🎉</li>`;
 
-      const amigoSorteadoElement = document.getElementById("amigoSorteado");
-      amigoSorteadoElement.classList.add("piscar");
-
-      if (audioCelebracao) {
-        audioCelebracao.play();
-      }
+      // Esconde o container "Sorteando..." e mostra a lista de resultados
+      sorteandoContainer.style.display = "none";
+      atualizarListaResultados();
+      listaResultados.style.display = "block";
 
       audioSuspense.pause();
       audioSuspense.currentTime = 0;
-
-      dispararConfete();
-
-      //Acessibilidade: Adiciona texto alternativo para o resultado do sorteio
-      amigoSorteadoElement.setAttribute(
-        "aria-label",
-        `Resultado do sorteio: ${amigoSorteado} vai presentear ${sorteadoPara}`
-      );
-
-      setTimeout(() => {
-        exibirMensagemParabens(amigoSorteado, sorteadoPara);
-      }, 1500);
-
-      atualizarHistoricoSorteios();
-
-      amigos = amigos.filter((amigo) => amigo !== amigoSorteado);
-
-      atualizarListaAmigos();
-
-      document.getElementById("sortear").disabled = false;
-
-      // Iniciar a animação de confetes no fundo
-      iniciarConfettiBackground();
     }
   }, 500);
+}
+
+// Função para atualizar a lista de resultados na tela
+function atualizarListaResultados() {
+  const listaResultados = document.getElementById("listaResultados");
+  listaResultados.innerHTML = "";
+
+  amigos.forEach((amigo) => {
+    const liResultado = document.createElement("li");
+    liResultado.textContent = amigo.nome;
+    const btnVerificar = document.createElement("button");
+    btnVerificar.textContent = "Verificar";
+    btnVerificar.onclick = () => verificarResultado(amigo.nome);
+    liResultado.appendChild(btnVerificar);
+    listaResultados.appendChild(liResultado);
+  });
+}
+
+function verificarResultado(nome) {
+  const password = prompt(`Por favor, digite a senha para ${nome}:`);
+  if (password === null || password.trim() === "") {
+    alert("Senha inválida!");
+    return;
+  }
+
+  const amigo = amigos.find((amigo) => amigo.nome === nome);
+
+  if (amigo && password === amigo.senha) {
+    // Encontre para quem o amigo sorteado deve dar o presente
+    const sorteio = historicoSorteios.find((sorteio) => sorteio.de === nome);
+    const sorteadoPara = sorteio ? sorteio.para : "Ninguém (erro)"; // Tratamento para caso não encontre o sorteado
+
+    // Criar o popup customizado
+    const popupContainer = document.createElement("div");
+    popupContainer.classList.add("popup-container");
+
+    const popupContent = document.createElement("div");
+    popupContent.classList.add("popup-content");
+
+    const closeBtn = document.createElement("span");
+    closeBtn.classList.add("close-btn");
+    closeBtn.innerHTML = "×";
+    closeBtn.onclick = () => popupContainer.remove();
+
+    const messageText = document.createElement("p");
+    messageText.textContent = `🎉 ${nome} -> ${sorteadoPara}! 🎉`;
+
+    popupContent.appendChild(closeBtn);
+    popupContent.appendChild(messageText);
+    popupContainer.appendChild(popupContent);
+    document.body.appendChild(popupContainer);
+
+    // Adicionar a comemoração
+    dispararConfete();
+    // Reproduzir o áudio de celebração
+    if (audioCelebracao) {
+      audioCelebracao.play();
+    }
+    exibirMensagemParabens(nome, sorteadoPara);
+  } else {
+    alert("Nome ou senha incorretos!");
+  }
 }
 
 function exibirMensagemParabens(amigoSorteado, sorteadoPara) {
@@ -207,40 +322,12 @@ function exibirMensagemParabens(amigoSorteado, sorteadoPara) {
 
   // Usar a API de síntese de fala
   const utterance = new SpeechSynthesisUtterance(mensagem);
-  speechSynthesis.speak(utterance);
   utterance.volume = volumeMensagemFalada;
+  // Define a taxa de fala (velocidade)
+  utterance.rate = 1.0; // O valor padrão é 1. Valores maiores aceleram a fala, menores a tornam mais lenta
 
-  // Criar o popup customizado
-  const popupContainer = document.createElement("div");
-  popupContainer.classList.add("popup-container");
-
-  const popupContent = document.createElement("div");
-  popupContent.classList.add("popup-content");
-
-  const closeBtn = document.createElement("span");
-  closeBtn.classList.add("close-btn");
-  closeBtn.innerHTML = "×";
-  closeBtn.onclick = () => popupContainer.remove();
-
-  const messageText = document.createElement("p");
-  messageText.textContent = mensagem;
-
-  popupContent.appendChild(closeBtn);
-  popupContent.appendChild(messageText);
-  popupContainer.appendChild(popupContent);
-  document.body.appendChild(popupContainer);
-}
-
-// Função para atualizar o histórico de sorteios na tela
-function atualizarHistoricoSorteios() {
-  const listaHistorico = document.getElementById("historicoSorteios");
-  listaHistorico.innerHTML = "";
-
-  historicoSorteios.forEach((sorteio) => {
-    const li = document.createElement("li");
-    li.textContent = `${sorteio.de} -> ${sorteio.para}`;
-    listaHistorico.appendChild(li);
-  });
+  // Reproduzir a fala
+  speechSynthesis.speak(utterance);
 }
 
 // Função para sortear novamente
@@ -253,6 +340,15 @@ function sortearNovamente() {
 
   // Parar a animação de confetes no fundo
   pararConfettiBackground();
+  pararConfetti();
+  document.getElementById("sortear").disabled = false;
+}
+
+// Função para parar o confete
+function pararConfetti() {
+  clearInterval(confettiInterval);
+  const confettiElements = document.querySelectorAll(".confetti");
+  confettiElements.forEach((confetti) => confetti.remove());
 }
 
 // Função para baixar o histórico de sorteios em TXT
@@ -262,7 +358,9 @@ function baixarHistorico() {
     texto += `${sorteio.de} -> ${sorteio.para}\n`;
   });
 
-  const blob = new Blob([texto], { type: "text/plain" });
+  const blob = new Blob([texto], {
+    type: "text/plain",
+  });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
@@ -277,7 +375,10 @@ function baixarHistorico() {
 function armazenarSorteio(de, para) {
   let sorteiosAnteriores = localStorage.getItem("sorteios") || "[]";
   sorteiosAnteriores = JSON.parse(sorteiosAnteriores);
-  sorteiosAnteriores.push({ de: de, para: para });
+  sorteiosAnteriores.push({
+    de: de,
+    para: para,
+  });
   localStorage.setItem("sorteios", JSON.stringify(sorteiosAnteriores));
 }
 
@@ -296,7 +397,7 @@ document.getElementById("amigo").addEventListener("keypress", function (e) {
   }
 });
 
-// Adicionar evento de clique no botão "Sortear Novamente"
+// Adicionar evento de clique no botão "Novo Sorteio"
 document
   .getElementById("sortearNovamente")
   .addEventListener("click", sortearNovamente);
@@ -310,5 +411,5 @@ document
 window.onload = () => {
   inicializarSons();
   // Carregar o histórico de sorteios ao carregar a página
-  carregarHistorico();
+  // carregarHistorico();
 };

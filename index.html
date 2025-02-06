@@ -15,42 +15,57 @@
 </head>
 
 <body>
-    <main class="main-content">
-        <header class="header-banner">
-            <h1 class="main-title">Caixa Surpresa</h1>
-            <img src="assets/amigo-secreto.png" alt="Imagem representativa de amigo secreto">
-        </header>
+    <div class="main-content-wrapper">
+        <main class="main-content">
+            <header class="header-banner">
+                <h1 class="main-title">Caixa Surpresa</h1>
+                <img src="assets/amigo-secreto.png" alt="Imagem representativa de amigo secreto">
+            </header>
 
-        <section class="input-section">
-            <h2 class="section-title">Digite o nome dos seus amigos</h2>
-            <div class="input-wrapper">
-                <input type="text" id="amigo" class="input-name" placeholder="Digite um nome">
-                <button class="button-add" onclick="adicionarAmigo()">Adicionar</button>
-            </div>
+            <section class="input-section">
+                <h2 class="section-title">Digite o nome dos seus amigos</h2>
+                <div class="input-wrapper">
+                    <input type="text" id="amigo" class="input-name" placeholder="Digite um nome">
+                    <input type="password" id="senha" class="input-name" placeholder="Digite uma senha">
+                    <button class="button-add" onclick="adicionarAmigo()">Adicionar</button>
+                </div>
 
-            <ul id="listaAmigos" class="name-list" aria-labelledby="listaAmigos" role="list"></ul>
+                <ul id="listaAmigos" class="name-list" aria-labelledby="listaAmigos" role="list"></ul>
+
+                <div class="button-container container">
+                    <button id="sortear" class="button-draw" onclick="sortearAmigo()"
+                        aria-label="Sortear amigo secreto">
+                        <img src="assets/play_circle_outline.png" alt="Ícone para sortear">
+                        Sortear amigo
+                    </button>
+                    <!-- Botão "Novo Sorteio" -->
+                    <button id="sortearNovamente" class="button-draw">Novo Sorteio</button>
+                    <!-- Botão "Baixar" -->
+                    <button id="baixarHistorico" class="button-draw">Baixar</button>
+                </div>
+                <!-- Formulario de verificação -->
 
 
-            <div class="button-container container">
-                <button id="sortear" class="button-draw" onclick="sortearAmigo()" aria-label="Sortear amigo secreto">
-                    <img src="assets/play_circle_outline.png" alt="Ícone para sortear">
-                    Sortear amigo
-                </button>
-                <!-- Botão "Sortear Novamente" -->
-                <button id="sortearNovamente" class="button-draw">Sortear Novamente</button>
-                <!-- Botão "Baixar Histórico" -->
-                <button id="baixarHistorico" class="button-draw">Baixar Histórico</button>
-            </div>
 
-            <ul id="resultado" class="result-list" aria-live="polite"></ul>
 
-            <!-- Histórico de Sorteios -->
-            <div class="historico">
-                <h2 class="section-title">Histórico de Sorteios</h2>
-                <ul id="historicoSorteios" class="name-list"></ul>
-            </div>
-        </section>
-    </main>
+                <div id="resultado" class="result-list" aria-live="polite"></div>
+
+                <!-- Lista para exibir os nomes e iniciar a verificação -->
+                <ul id="listaResultados" class="name-list" aria-labelledby="listaResultados" role="list">
+                    <!-- Os nomes serão adicionados aqui dinamicamente -->
+                </ul>
+
+                <!-- Container "Sorteando..." -->
+                <div id="sorteandoContainer" class="sorteando-container">
+                    <p id="sorteandoTexto">Sorteando...</p>
+                </div>
+        </main>
+
+        <!-- Background animado -->
+        <div class="bg"></div>
+        <div class="bg bg2"></div>
+        <div class="bg bg3"></div>
+    </div>
 
     <script src="app.js" defer></script>
 </body>
