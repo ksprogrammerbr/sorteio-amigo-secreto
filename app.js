@@ -20,7 +20,7 @@ function adicionarNome() {
   }
 
   if (nomes.includes(nome)) {
-    alert("Esse nome já foi adicionado!");
+    alert("Esse nome já foi adicionado, Por favor! Insira outro nome");
     return;
   }
 
