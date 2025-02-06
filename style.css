@@ -1,12 +1,12 @@
 :root {
-  --color-primary: #6c63ff;
-  --color-secondary: #fff9eb;
+  --color-primary: #490c99;
+  --color-secondary: #ebdec2;
   --color-tertiary: #c4c4c4;
-  --color-button: #ff6b6b;
+  --color-button: #8e3ceb;
   --color-button-hover: #ff8787;
   --color-text: #444444;
   --color-white: #ffffff;
-  --gradient-primary: linear-gradient(135deg, #6c63ff 0%, #4834d4 100%);
+  --gradient-primary: linear-gradient(135deg, #eb1ac8 0%, #300349 100%);
 }
 
 /* Estilos gerais */
@@ -42,7 +42,7 @@ body {
 }
 
 .header-banner img {
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(0 4px 12px rgba(169, 20, 189, 0.2));
   transition: transform 0.3s ease;
 }
 
@@ -178,7 +178,7 @@ ul {
   font-weight: bold;
   text-align: center;
   animation: fadeIn 0.5s ease;
-  box-shadow: 0 4px 12px rgba(5, 223, 5, 0.2);
+  box-shadow: 0 4px 12px rgba(146, 45, 240, 0.2);
 }
 
 @keyframes fadeIn {
@@ -247,7 +247,7 @@ ul {
   position: fixed;
   width: 10px;
   height: 10px;
-  background-color: #f0f;
+  background-color: rgb(0, 255, 106);
   animation: confetti-fall 3s linear infinite;
 }
 
@@ -258,4 +258,102 @@ ul {
   100% {
     transform: translateY(100vh) rotate(360deg);
   }
+}
+
+.piscar {
+  animation: piscar 1s infinite;
+  font-size: 2.2em; /* Aumenta o tamanho do texto */
+}
+
+@keyframes piscar {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#sortearNovamente {
+  /* Estilos para o botão Sortear Novamente, se necessário */
+  margin-top: 10px; /* Adiciona um pouco de espaço acima do botão */
+}
+
+.historico {
+  margin-top: 20px; /* Espaço acima da seção de histórico */
+}
+
+.historico ul {
+  list-style: none; /* Remove os bullets da lista */
+  padding: 0;
+}
+
+.historico li {
+  margin-bottom: 5px; /* Espaço entre os nomes no histórico */
+}
+
+/* Estilos para o popup */
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Garante que o popup fique na frente de outros elementos */
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  text-align: center;
+  width: 80%;
+  max-width: 500px;
+  background: linear-gradient(135deg, #e094f0, #13b5dd); /* Gradiente suave */
+  transition: transform 0.8s ease; /* Adiciona uma transição suave */
+}
+
+.popup-content:hover {
+  transform: scale(1.05); /* Efeito de "aumento" no hover */
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #555;
+  transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+.popup-content p {
+  font-size: 1.2em;
+  color: #333;
+}
+
+/* Estilos para o container */
+.container {
+  position: relative;
+  overflow: hidden; /* Garante que o confete não vaze para fora */
+}
+
+/* Estilos para o espaçamento dos botões */
+.button-container {
+  display: flex;
+  flex-direction: column; /* Coloca os botões em coluna */
+  gap: 10px; /* Adiciona um espaço de 10px entre os botões */
 }

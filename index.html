@@ -29,13 +29,25 @@
             </div>
 
             <ul id="listaAmigos" class="name-list" aria-labelledby="listaAmigos" role="list"></ul>
-            <ul id="resultado" class="result-list" aria-live="polite"></ul>
 
-            <div class="button-container">
-                <button class="button-draw" onclick="sortearAmigo()" aria-label="Sortear amigo secreto">
+
+            <div class="button-container container">
+                <button id="sortear" class="button-draw" onclick="sortearAmigo()" aria-label="Sortear amigo secreto">
                     <img src="assets/play_circle_outline.png" alt="Ícone para sortear">
                     Sortear amigo
                 </button>
+                <!-- Botão "Sortear Novamente" -->
+                <button id="sortearNovamente" class="button-draw">Sortear Novamente</button>
+                <!-- Botão "Baixar Histórico" -->
+                <button id="baixarHistorico" class="button-draw">Baixar Histórico</button>
+            </div>
+
+            <ul id="resultado" class="result-list" aria-live="polite"></ul>
+
+            <!-- Histórico de Sorteios -->
+            <div class="historico">
+                <h2 class="section-title">Histórico de Sorteios</h2>
+                <ul id="historicoSorteios" class="name-list"></ul>
             </div>
         </section>
     </main>
