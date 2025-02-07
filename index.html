@@ -11,58 +11,53 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700;900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"
         rel="stylesheet">
-    <title>Caixa Surpresa da Felicidade</title>
+    <title>Amigo não tão Secreto</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
 
 <body>
-    <div class="main-content-wrapper">
-        <main class="main-content">
-            <header class="header-banner">
-                <h1 class="main-title">Caixa Surpresa da Felicidade</h1>
-                <img src="assets/amigo-secreto.png" alt="Imagem representativa de amigo secreto">
-            </header>
+    <!-- Container para o particles.js (ADICIONADO) -->
+    <div id="particles-js"></div>
 
-            <section class="input-section">
-                <h2 class="section-title">Digite o nome dos seus amigos</h2>
-                <div class="input-wrapper">
-                    <input type="text" id="amigo" class="input-name" placeholder="Digite um nome">
-                    <input type="password" id="senha" class="input-name" placeholder="Digite uma senha">
-                    <button type="button" class="button-add" onclick="adicionarAmigo()">Adicionar</button>
-                </div>
+    <main class="main-content">
+        <header class="header-banner">
+            <h1 class="main-title">🎁 Amigo não tão Secreto 🤫 </h1>
+            <img src="assets/amigo-secreto.png" alt="Imagem representativa de amigo secreto">
+        </header>
 
-                <ul id="listaAmigos" class="name-list" aria-labelledby="listaAmigos" role="list"></ul>
+        <section class="input-section">
+            <h2 class="section-title">Digite o nome dos seus amigos</h2>
+            <div class="input-wrapper">
+                <input type="text" id="amigo" class="input-name" placeholder="Digite um nome">
+                <input type="password" id="senha" class="input-name" placeholder="Digite uma senha">
+                <button type="button" class="button-add" onclick="adicionarAmigo()">Adicionar</button>
+            </div>
 
-                <div class="button-container container">
-                    <button id="sortear" class="button-draw" onclick="sortearAmigo()"
-                        aria-label="Sortear amigo secreto">
-                        <img src="assets/play_circle_outline.png" alt="Ícone para sortear">
-                        Sortear amigo
-                    </button>
-                    <!-- Botão "Novo Sorteio" -->
-                    <button id="sortearNovamente" class="button-draw">Novo Sorteio</button>
-                    <!-- Botão "Baixar" -->
-                    <button id="baixarHistorico" class="button-draw">Baixar</button>
-                </div>
-                <div id="resultado"></div>
-                <ul id="listaResultados" class="name-list" aria-labelledby="listaResultados" role="list">
-                    <!-- Os nomes serão adicionados aqui dinamicamente -->
-                </ul>
+            <ul id="listaAmigos" class="name-list" aria-labelledby="listaAmigos" role="list"></ul>
 
-                <!-- Container "Sorteando..." -->
-                <div id="sorteandoContainer" class="sorteando-container">
-                    <p id="sorteandoTexto">Sorteando...</p>
-                </div>
-            </section>
-        </main>
+            <div class="button-container container">
+                <button id="sortear" class="button-draw" onclick="sortearAmigo()" aria-label="Sortear amigo secreto">
+                    <img src="assets/play_circle_outline.png" alt="Ícone para sortear">
+                    Sortear amigo
+                </button>
+                <!-- Botão "Novo Sorteio" -->
+                <button id="sortearNovamente" class="button-draw">Novo Sorteio</button>
+                <!-- Botão "Baixar" -->
+                <button id="baixarHistorico" class="button-draw">Baixar</button>
+            </div>
+            <div id="resultado"></div>
+            <ul id="listaResultados" class="name-list" aria-labelledby="listaResultados" role="list">
+                <!-- Os nomes serão adicionados aqui dinamicamente -->
+            </ul>
 
-        <!-- Background animado -->
-        <div class="bg"></div>
-        <div class="bg bg2"></div>
-        <div class="bg bg3"></div>
-    </div>
-    </div>
-    </div>
+            <!-- Container "Sorteando..." -->
+            <div id="sorteandoContainer" class="sorteando-container">
+                <p id="sorteandoTexto">Sorteando...</p>
+            </div>
+        </section>
+    </main>
+
     <footer class="footer">
         Challenge Amigo Secreto - Karina Araújo - 2025
     </footer>
