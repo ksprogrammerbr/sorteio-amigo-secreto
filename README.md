@@ -1,57 +1,126 @@
-# Projeto de Sorteio de Amigo Secreto
+# 🎁 Amigo Secreto Web App
 
-Este é um projeto simples de sorteio de amigo secreto, onde os usuários podem adicionar seus nomes e realizar um sorteio aleatório para definir quem é o amigo secreto de cada um. A aplicação é desenvolvida utilizando HTML, CSS e JavaScript.
+Este é um aplicativo web simples para realizar sorteios de **Amigo Secreto**! 🏆 Ele permite adicionar participantes, realizar o sorteio e verificar os resultados com segurança. 🔒 projetado para modernizar a tradicional brincadeira de amigo secreto. Em vez de sortear nomes em papéis, a aplicação permite que cada participante insira seu nome e realize o sorteio digitalmente.
 
-## Funcionalidades
+---
 
-- **Adicionar nomes:** Permite aos usuários inserir nomes na lista de participantes.
-- **Sorteio Aleatório:** Realiza um sorteio aleatório de um nome da lista, exibindo o resultado na tela.
-- **Validação de entrada:** O sistema valida se o campo de nome está vazio antes de adicionar um nome à lista.
+## ✨ Funcionalidades
 
-## Como funciona?
+### ✅ **Adicionar Amigos**
+🔹 Permite adicionar nomes de participantes à lista do sorteio.  
+🔹 Requer um **nome** e uma **senha única** para cada participante.  
+🔹 **Validações:**  
+   - ❌ Nomes não podem ser vazios.
+   - 🔤 Apenas letras e espaços são permitidos.
+   - 🔄 Nomes não podem ser repetidos.
+   - 🔑 Senhas devem ser únicas e não vazias.
 
-1. **Adicionar nomes:**
+### 📋 **Listar Amigos**
+👀 Exibe a lista de amigos adicionados.  
+🗑️ Permite remover amigos da lista.
 
-   - O usuário insere um nome no campo de entrada e clica no botão "Adicionar". O nome será adicionado à lista de amigos.
-   - Se o campo de nome estiver vazio, o sistema exibe um alerta pedindo uma entrada válida.
+### 🎲 **Realizar Sorteio**
+🎯 O sorteio é feito de forma **aleatória e justa**.  
+🚫 Garante que nenhum participante tire a si mesmo.  
+📢 Usa **animação de suspense** e efeitos sonoros.  
+🎉 Apresenta **confetes** ao revelar os resultados!
 
-2. **Sorteio de Amigo Secreto:**
-   - Após adicionar nomes, o usuário pode clicar no botão "Sortear". O sistema irá sortear aleatoriamente um nome da lista e exibir o resultado na tela.
-   - Se a lista estiver vazia, o sistema alertará para adicionar pelo menos um nome.
+### 🔍 **Verificar Resultado**
+🔐 Cada participante insere sua senha para ver seu amigo secreto.  
+📢 A API **Text-to-Speech** anuncia o resultado.  
+🎊 **Efeito de confete** e **som de celebração** ao revelar!
 
-## Como usar
+### 🔄 **Novo Sorteio**
+🧹 Limpa a lista de amigos e o histórico para um novo sorteio.
 
-1. Clone o repositório:
+### 📥 **Baixar Histórico**
+💾 Permite baixar o histórico do sorteio em um arquivo **.TXT**.
 
+### 🎇 **Animações e Sons**
+💥 **Confetes** ao final do sorteio e **partículas visuais** ao fundo.
+🎶 Efeitos sonoros para criar mais emoção!
+
+---
+
+## 🚀 Como brincar
+
+1️⃣ **Adicionar Participantes:** Informe nome e senha e clique em "Adicionar".  
+2️⃣ **Realizar o Sorteio:** Clique no botão "Sortear" e aguarde.  
+3️⃣ **Verificar Resultado:** Cada participante insere sua senha para descobrir seu amigo secreto.  
+4️⃣ **Novo Sorteio:** Clique em "Novo Sorteio" para recomeçar.  
+5️⃣ **Baixar Histórico:** Clique em "Baixar Histórico" para salvar os dados.
+
+---
+
+## 📂 Estrutura dos Arquivos
+
+📌 `app.js` → Lógica principal do aplicativo.  
+📌 `index.html` → Estrutura da página web.  
+📌 `style.css` → Estilização do aplicativo.  
+📌 `assets/suspense.mp3` → Som de suspense.  
+📌 `assets/celebracao.mp3` → Som de celebração.  
+📌 `particles.js` → Biblioteca de efeitos visuais.  
+📌 `confetti.js` → Biblioteca de confetes.
+
+---
+
+# 🛠️ Como Usar o Repositório no GitHub
+
+### 1️⃣ Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/nome-do-repositorio.git
+git clone git@github.com:ksprogrammerbr/sorteio-amigo-secreto.git
+ ```
+### 2️⃣ Acesse o diretório do projeto:
+   ```bash
+cd sorteio-amigo-secreto
+ ```
+### 4️⃣ Abra o arquivo index.html no navegador ou utilize um servidor local:
 
-   ```
+### 5️⃣ Para contribuir:
 
-2. Navegue até o diretório do projeto:
+Crie um branch para suas alterações:
+ ```bash
+git checkout -b minha-nova-feature
+ ```
+Faça suas modificações e commite:
+ ```bash
+git commit -m "Adicionando nova funcionalidade"
+ ```
+Envie suas alterações para o repositório:
+ ```bash
+git push origin minha-nova-feature
+ ```
+Abra um Pull Request no GitHub.
 
-```bash
-cd nome-do-repositorio
+Agora você está pronto para usar e contribuir com o repositório! 🚀
 
-3. Abra o arquivo **index.html** no seu navegador para usar a aplicação.
+---
 
-Estrutura de arquivos
+## Idiomas Suportados
 
-**index.html** - Arquivo principal da aplicação com a estrutura HTML.
-**style.css** - Arquivo de estilo para a interface.
-**script.js** - Arquivo JavaScript com a lógica de adição de nomes e sorteio.
+- Português (Brasil)
 
-**Como contribuir**
+---
+## 📷 Layout
 
-Se você quiser contribuir para o projeto, siga estas etapas:
+![image](https://github.com/user-attachments/assets/8ebba073-18b7-4a7d-a3bc-72fa4dbfadd4)
 
-Fork o repositório.
-Crie uma nova branch (git checkout -b minha-nova-feature).
-Faça suas alterações e commit (git commit -am 'Adicionando nova feature').
-Push para a branch (git push origin minha-nova-feature).
-Abra um pull request.
+## [🎥 Assista ao vídeo Explicativo]
 
-Licença
-===================
-Este projeto está licenciado sob a **MIT License**.
-```
+https://github.com/user-attachments/assets/ef71408f-a0e4-408d-9293-a100c1e24f14
+
+---
+
+## 🔍 Observações
+
+⚠️ Alguns navegadores podem bloquear o **autoplay de áudio**. 
+⚠️ A API de **Text-to-Speech** pode não funcionar em todos os navegadores.
+⚠️ As senhas **não são armazenadas** permanentemente; apenas na memória do navegador.
+⚠️ O histórico de sorteios é salvo no **localStorage**.
+
+---
+
+## 📌 Dependências
+
+🔹 **particles.js** → [GitHub](https://github.com/VincentGarreau/particles.js/)  
+🔹 **confetti-js** → [NPM](https://www.npmjs.com/package/canvas-confetti)
