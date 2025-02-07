@@ -333,7 +333,8 @@ function sortearNovamente() {
   amigos = [];
   atualizarListaAmigos();
   historicoSorteios = [];
-  atualizarHistoricoSorteios();
+  const listaResultados = document.getElementById("listaResultados");
+  listaResultados.innerHTML = "";
 
   // Parar a animação de confetes no fundo
   pararConfettiBackground();

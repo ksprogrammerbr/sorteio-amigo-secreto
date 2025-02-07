@@ -9,6 +9,10 @@
   --gradient-primary: linear-gradient(135deg, #eb1ac8 0%, #300349 100%);
 }
 
+.footer {
+  text-align: center;
+}
+
 /* Estilos gerais */
 * {
   margin: 0;
@@ -26,6 +30,7 @@ body {
   /* Adicione isso */
   overflow-x: hidden;
   /* esconde as barras de rolagem */
+  background-size: cover;
 }
 
 /* Estilos para o wrapper do conteúdo principal */
@@ -39,13 +44,14 @@ body {
   box-sizing: border-box;
   position: relative;
   z-index: 2;
-  /* Aumenta o z-index para ficar acima do fundo */
   max-width: 900px;
-  /* Adicione um max-width */
   margin: 0 auto;
-  box-shadow: 0 10px 30px rgba(243, 238, 238, 0.952),
-    0 0 50px rgba(23, 230, 245, 0.5);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px); /* Efeito de blur mais forte */
+  background: rgba(255, 255, 255, 0.1); /* Transparência ajustada */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Borda levemente transparente */
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Sombras suaves */
+  overflow-x: auto;
 }
 
 /* Estilos para o conteúdo principal */
@@ -402,9 +408,9 @@ ul {
 }
 
 /* Responsividade */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .main-title {
-    font-size: 36px;
+    font-size: 40px;
   }
 
   .section-title {
