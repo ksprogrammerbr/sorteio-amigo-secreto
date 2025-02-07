@@ -149,6 +149,14 @@ function sortearAmigo() {
   const sorteandoContainer = document.getElementById("sorteandoContainer");
   sorteandoContainer.style.display = "block";
 
+  // Tenta reproduzir o áudio de suspense ao iniciar o sorteio (necessita interação do usuário)
+  if (audioSuspense) {
+    audioSuspense.play().catch((error) => {
+      console.warn("Autoplay do áudio de suspense bloqueado:", error);
+      // Adicionar um botão ou outra forma de interação para iniciar o áudio
+    });
+  }
+
   let contador = 3;
   const resultado = document.getElementById("resultado");
   resultado.innerHTML = ``;
@@ -229,10 +237,6 @@ function realizarSorteio() {
   // Atualiza o histórico de sorteios
   historicoSorteios = novosSorteios;
 
-  if (audioSuspense) {
-    audioSuspense.play();
-  }
-
   let dots = "";
   let count = 0;
   const suspense = setInterval(() => {
@@ -249,8 +253,10 @@ function realizarSorteio() {
       atualizarListaResultados();
       listaResultados.style.display = "block";
 
-      audioSuspense.pause();
-      audioSuspense.currentTime = 0;
+      if (audioSuspense) {
+        audioSuspense.pause();
+        audioSuspense.currentTime = 0;
+      }
     }
   }, 500);
 }
@@ -277,7 +283,7 @@ function verificarResultado(nome) {
   modal.classList.add("modal");
   modal.innerHTML = `
     <div class="modal-content">
-      <span class="close-button">&times;</span>
+      <span class="close-button">×</span>
       <p>Por favor, digite a senha para ${nome}:</p>
       <input type="password" id="passwordInput" class="input-name">
       <div class="modal-buttons">
@@ -350,16 +356,36 @@ function verificarResultado(nome) {
 }
 
 function exibirMensagemParabens(amigoSorteado, sorteadoPara) {
-  const mensagem = `Parabéns ${amigoSorteado}, pode gastar seu dinheiro suado para comprar o presente`;
+  if ("speechSynthesis" in window) {
+    // Verifica se a API está disponível
+    const mensagem = `Parabéns ${amigoSorteado}, pode gastar seu dinheiro suado para comprar o presente`;
 
-  // Usar a API de síntese de fala
-  const utterance = new SpeechSynthesisUtterance(mensagem);
-  utterance.volume = volumeMensagemFalada;
-  // Define a taxa de fala (velocidade)
-  utterance.rate = 1.0; // O valor padrão é 1. Valores maiores aceleram a fala, menores a tornam mais lenta
+    // Usar a API de síntese de fala
+    const utterance = new SpeechSynthesisUtterance(mensagem);
+    utterance.volume = volumeMensagemFalada;
+    // Define a taxa de fala (velocidade)
+    utterance.rate = 1.0; // O valor padrão é 1. Valores maiores aceleram a fala, menores a tornam mais lenta
 
-  // Reproduzir a fala
-  speechSynthesis.speak(utterance);
+    // Verifica se há vozes disponíveis
+    const voices = speechSynthesis.getVoices();
+    if (voices.length > 0) {
+      // Seleciona uma voz (por exemplo, a primeira voz disponível)
+      utterance.voice = voices[0];
+    }
+
+    // Adiciona um pequeno atraso
+    setTimeout(() => {
+      speechSynthesis.speak(utterance);
+    }, 100); // Atraso de 100 milissegundos
+  } else {
+    console.warn(
+      "A API de Text-to-Speech não está disponível neste navegador."
+    );
+    // Adicione um fallback (por exemplo, exibir a mensagem em um elemento HTML)
+    alert(
+      `Parabéns ${amigoSorteado}, pode gastar seu dinheiro suado para comprar o presente`
+    );
+  }
 }
 
 // Função para sortear novamente
@@ -441,13 +467,10 @@ document
   .addEventListener("click", baixarHistorico);
 
 // Inicializar os sons ao carregar a página
-window.onload = () => {
-  inicializarSons();
-  // Carregar o histórico de sorteios ao carregar a página
-  // carregarHistorico();
-};
+inicializarSons();
 
-window.onload = function () {
+// Função para combinar a inicialização do particles.js e outras ações
+window.onload = () => {
   particlesJS(
     "particles-js",
 
