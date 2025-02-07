@@ -105,7 +105,7 @@ Agora você está pronto para usar e contribuir com o repositório! 🚀
 
 ![image](https://github.com/user-attachments/assets/8ebba073-18b7-4a7d-a3bc-72fa4dbfadd4)
 
-## [🎥 Assista ao vídeo Explicativo]
+## 🎥 Assista ao vídeo Explicativo
 
 https://github.com/user-attachments/assets/ef71408f-a0e4-408d-9293-a100c1e24f14
 
