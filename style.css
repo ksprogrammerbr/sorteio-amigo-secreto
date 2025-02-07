@@ -356,6 +356,859 @@ ul {
   }
 }
 
+/* The Modal (background) */
+.modal {
+  display: flex;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #f9f9f9; /* Um cinza bem claro para o fundo */
+  border-radius: 12px; /* Arredondamento suave das bordas */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra sutil para profundidade */
+  margin: 15% auto;
+  padding: 30px;
+  border: none;
+  width: 80%;
+  position: relative;
+  font-family: "Inter", sans-serif;
+  font-size: 16px; /* Ou 1em, 1.2rem */
+  font-weight: bold; /* ou bold, lighter, 500, etc. */
+  line-height: 1.6;
+  text-align: left; /* Alinhamento padrão */
+  letter-spacing: 0.02em;
+  color: var(--color-text);
+  text-shadow: 1px 1px 2px rgba(207, 221, 230, 0.925); /* Exemplo de sombra sutil */
+  word-spacing: 0.1em;
+  z-index: 3;
+  font-style: italic; /* ou italic */
+}
+:root {
+  --color-primary: #0c9099;
+  --color-secondary: #ebdec2;
+  --color-tertiary: #c4c4c4;
+  --color-button: #1b96dd;
+  --color-button-hover: #ff8787;
+  --color-text: #444444;
+  --color-white: #ffffff;
+  --gradient-primary: linear-gradient(135deg, #eb1ac8 0%, #300349 100%);
+}
+
+.footer {
+  text-align: center;
+}
+
+/* Estilos gerais */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--gradient-primary);
+  font-family: "Inter", sans-serif;
+  color: var(--color-text);
+  overflow-y: auto;
+  /* Adicione isso */
+  overflow-x: hidden;
+  /* esconde as barras de rolagem */
+  background-size: cover;
+}
+
+/* Estilos para o wrapper do conteúdo principal */
+.main-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+  backdrop-filter: blur(20px); /* Efeito de blur mais forte */
+  background: rgba(255, 255, 255, 0.1); /* Transparência ajustada */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Borda levemente transparente */
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Sombras suaves */
+  overflow-x: auto;
+}
+
+/* Estilos para o conteúdo principal */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 800px;
+  border-radius: 30px;
+  overflow: hidden;
+  background-color: rgba(235, 222, 194, 0.1);
+  /* Altere a transparência conforme necessário */
+  backdrop-filter: blur(10px);
+  /* Adiciona o efeito de blur */
+  box-shadow: 0 10px 30px rgba(151, 206, 243, 0.979);
+  position: relative;
+  z-index: 3;
+  /* Z-index ainda maior */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.952), 0 0 50px rgba(73, 12, 153, 0.5);
+  border: 1px solid rgba(6, 238, 255, 1);
+  /* Borda suave */
+}
+
+/* Banner */
+.header-banner {
+  padding: 40px 20px 0;
+  text-align: center;
+}
+
+.header-banner img {
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0 4px 12px rgba(247, 186, 255, 0.507));
+  transition: transform 0.3s ease;
+}
+
+.header-banner img:hover {
+  transform: scale(1.09);
+}
+
+/* Seção de entrada */
+.input-section {
+  padding: 30px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  /* Adicione isso */
+}
+
+/* Títulos */
+.main-title {
+  font-size: 48px;
+  font-family: "Merriweather", serif;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--color-white);
+  text-shadow: 2px 2px 4px rgb(8, 8, 8);
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-secondary);
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+/* Contêineres de entrada e botão */
+.input-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Estilos para os campos de entrada de nome e senha */
+.input-name {
+  width: 100%;
+  /* Ocupa toda a largura disponível */
+  max-width: none;
+  /* Remove a largura máxima */
+  min-width: 0;
+  /* Garante que o elemento possa encolher abaixo de seu tamanho natural */
+  flex-grow: 1;
+  /* Permite que os elementos se expandam e preencham o espaço disponível */
+  padding: 15px;
+  border: 2px solid transparent;
+  border-radius: 25px;
+  font-size: 16px;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 4px rgba(7, 210, 236, 0.05);
+  margin-right: 10px;
+  /* Adiciona uma margem entre os campos e o botão */
+  box-sizing: border-box;
+}
+
+.input-name:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background-color: var(--color-white);
+}
+
+/* Estilos de botão */
+button {
+  padding: 15px 30px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button-add {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 25px;
+  padding: 15px 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.692);
+}
+
+.button-add:hover {
+  background-color: #f742ee;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgb(37, 195, 235);
+}
+
+/* Listas */
+ul {
+  list-style-type: none;
+  color: var(--color-text);
+  font-size: 18px;
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  max-height: 200px;
+  /* Ajuste a altura máxima conforme necessário */
+  overflow-y: auto;
+  /* Adiciona a rolagem vertical quando necessário */
+  overflow-x: hidden;
+  padding-right: 5px;
+  /* Garante que a barra de rolagem não cubra o texto */
+}
+
+.name-list li {
+  background-color: #e2cee7;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.name-list li:hover {
+  transform: translateX(5px);
+}
+
+/* Botão de sortear */
+.button-draw {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 15px 30px;
+  color: var(--color-white);
+  background: linear-gradient(
+    45deg,
+    var(--color-button-hover) 0%,
+    #bb6ce0e5 100%
+  );
+  font-size: 18px;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.842);
+  border: 1px solid rgba(229, 177, 245, 0.966);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.button-draw::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.button-draw:hover::before {
+  left: 100%;
+}
+
+.button-draw:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(7, 243, 243, 0.747);
+}
+
+.button-draw img {
+  margin-right: 15px;
+  transition: transform 0.3s ease;
+}
+
+.button-draw:hover img {
+  transform: rotate(360deg);
+}
+
+/* Estilos para a animação de "Sorteando..." */
+.sorteando-container {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(116, 11, 185, 0.781);
+  /* Fundo transparente */
+  backdrop-filter: blur(30px);
+  /* Efeito de blur */
+  padding: 40px;
+  /* Aumenta o tamanho da caixa */
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  text-align: center;
+  font-size: 1.2em;
+  /* Aumenta a fonte */
+}
+
+#sorteandoTexto {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--color-secondary);
+  animation: pulse 1.5s infinite alternate;
+  text-shadow: 1px 1px 2px rgba(1, 0, 2, 0.1);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* Estilos para a animação de confete */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background-color: rgb(255, 0, 221);
+  animation: confetti-fall 3s linear infinite;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-100%) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+.piscar {
+  animation: piscar 1s infinite;
+  font-size: 2.2em;
+}
+
+@keyframes piscar {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #dfd9d9;
+  margin: 5% auto;
+  padding: 20px;
+  border: 3px solid #03ffff; /* Borda mais grossa e cor cinza clara */
+  width: 90%;
+  max-width: 600px;
+  border-radius: 20px; /* Aumenta o arredondamento da borda */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra mais forte */
+  position: relative;
+  z-index: 3;
+  overflow: hidden;
+}
+
+/* The Close Button */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #555;
+  font-size: 24px;
+  font-weight: normal;
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: #0e0101;
+  text-decoration: "";
+}
+
+/* Modal Buttons */
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+  gap: 10px;
+}
+
+.modal-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.modal-buttons button:first-child {
+  background-color: #ccc;
+  color: #333;
+}
+
+.modal-buttons button:first-child:hover {
+  background-color: #bbb;
+}
+
+.modal-buttons button:last-child {
+  background-color: #f700ff;
+  color: #fff;
+}
+
+.modal-buttons button:last-child:hover {
+  background-color: #ff11ff;
+}
+
+/* Estilo adicional para os botões (opcional) */
+.modal-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.modal-buttons button:first-child {
+  background-color: #aeaaaf;
+  color: #000000;
+}
+
+.modal-buttons button:first-child:hover {
+  background-color: #ec0d0d;
+}
+
+.modal-buttons button:last-child {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.modal-buttons button:last-child:hover {
+  background-color: #ce0aff;
+}
+:root {
+  --color-primary: #0c9099;
+  --color-secondary: #ebdec2;
+  --color-tertiary: #c4c4c4;
+  --color-button: #1b96dd;
+  --color-button-hover: #ff8787;
+  --color-text: #444444;
+  --color-white: #ffffff;
+  --gradient-primary: linear-gradient(135deg, #eb1ac8 0%, #300349 100%);
+}
+
+.footer {
+  text-align: center;
+}
+
+/* Estilos gerais */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--gradient-primary);
+  font-family: "Inter", sans-serif;
+  color: var(--color-text);
+  overflow-y: auto;
+  /* Adicione isso */
+  overflow-x: hidden;
+  /* esconde as barras de rolagem */
+  background-size: cover;
+}
+
+/* Estilos para o wrapper do conteúdo principal */
+.main-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+  backdrop-filter: blur(20px); /* Efeito de blur mais forte */
+  background: rgba(255, 255, 255, 0.1); /* Transparência ajustada */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Borda levemente transparente */
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Sombras suaves */
+  overflow-x: auto;
+}
+
+/* Estilos para o conteúdo principal */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 800px;
+  border-radius: 30px;
+  overflow: hidden;
+  background-color: rgba(235, 222, 194, 0.1);
+  /* Altere a transparência conforme necessário */
+  backdrop-filter: blur(10px);
+  /* Adiciona o efeito de blur */
+  box-shadow: 0 10px 30px rgba(151, 206, 243, 0.979);
+  position: relative;
+  z-index: 3;
+  /* Z-index ainda maior */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.952), 0 0 50px rgba(73, 12, 153, 0.5);
+  border: 1px solid rgba(6, 238, 255, 1);
+  /* Borda suave */
+}
+
+/* Banner */
+.header-banner {
+  padding: 40px 20px 0;
+  text-align: center;
+}
+
+.header-banner img {
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0 4px 12px rgba(247, 186, 255, 0.507));
+  transition: transform 0.3s ease;
+}
+
+.header-banner img:hover {
+  transform: scale(1.09);
+}
+
+/* Seção de entrada */
+.input-section {
+  padding: 30px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  /* Adicione isso */
+}
+
+/* Títulos */
+.main-title {
+  font-size: 48px;
+  font-family: "Merriweather", serif;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--color-white);
+  text-shadow: 2px 2px 4px rgb(8, 8, 8);
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-secondary);
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+/* Contêineres de entrada e botão */
+.input-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Estilos para os campos de entrada de nome e senha */
+.input-name {
+  width: 100%;
+  /* Ocupa toda a largura disponível */
+  max-width: none;
+  /* Remove a largura máxima */
+  min-width: 0;
+  /* Garante que o elemento possa encolher abaixo de seu tamanho natural */
+  flex-grow: 1;
+  /* Permite que os elementos se expandam e preencham o espaço disponível */
+  padding: 15px;
+  border: 2px solid transparent;
+  border-radius: 25px;
+  font-size: 16px;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 4px rgba(7, 210, 236, 0.05);
+  margin-right: 10px;
+  /* Adiciona uma margem entre os campos e o botão */
+  box-sizing: border-box;
+}
+
+.input-name:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background-color: var(--color-white);
+}
+
+/* Estilos de botão */
+button {
+  padding: 15px 30px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button-add {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 25px;
+  padding: 15px 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.692);
+}
+
+.button-add:hover {
+  background-color: #f742ee;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgb(37, 195, 235);
+}
+
+/* Listas */
+ul {
+  list-style-type: none;
+  color: var(--color-text);
+  font-size: 18px;
+  margin-bottom: 20px;
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  max-height: 200px;
+  /* Ajuste a altura máxima conforme necessário */
+  overflow-y: auto;
+  /* Adiciona a rolagem vertical quando necessário */
+  overflow-x: hidden;
+  padding-right: 5px;
+  /* Garante que a barra de rolagem não cubra o texto */
+}
+
+.name-list li {
+  background-color: #e2cee7;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.name-list li:hover {
+  transform: translateX(5px);
+}
+
+/* Botão de sortear */
+.button-draw {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 15px 30px;
+  color: var(--color-white);
+  background: linear-gradient(
+    45deg,
+    var(--color-button-hover) 0%,
+    #bb6ce0e5 100%
+  );
+  font-size: 18px;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.842);
+  border: 1px solid rgba(229, 177, 245, 0.966);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.button-draw::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.button-draw:hover::before {
+  left: 100%;
+}
+
+.button-draw:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(7, 243, 243, 0.747);
+}
+
+.button-draw img {
+  margin-right: 15px;
+  transition: transform 0.3s ease;
+}
+
+.button-draw:hover img {
+  transform: rotate(360deg);
+}
+
+/* Estilos para a animação de "Sorteando..." */
+.sorteando-container {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(116, 11, 185, 0.781);
+  /* Fundo transparente */
+  backdrop-filter: blur(30px);
+  /* Efeito de blur */
+  padding: 40px;
+  /* Aumenta o tamanho da caixa */
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  text-align: center;
+  font-size: 1.2em;
+  /* Aumenta a fonte */
+}
+
+#sorteandoTexto {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--color-secondary);
+  animation: pulse 1.5s infinite alternate;
+  text-shadow: 1px 1px 2px rgba(1, 0, 2, 0.1);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* Estilos para a animação de confete */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background-color: rgb(255, 0, 221);
+  animation: confetti-fall 3s linear infinite;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-100%) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+.piscar {
+  animation: piscar 1s infinite;
+  font-size: 2.2em;
+}
+
+@keyframes piscar {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 .result-list {
   text-align: center;
   font-size: 1.5em;
@@ -484,17 +1337,19 @@ ul {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(255, 255, 255, 0.9);
+  background: linear-gradient(to right, #ff8a00, #e52e71);
   padding: 40px;
   border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
   z-index: 10;
   text-align: center;
   font-size: 2.2em;
   font-weight: bold;
-  color: var(--color-button-hover);
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  color: #333;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.5s ease;
+  border: 2px solid #fff;
+  font-family: "Arial", sans-serif;
 }
 
 @keyframes fadeIn {
@@ -523,6 +1378,20 @@ ul {
   }
 
   100% {
+    opacity: 1;
+  }
+}
+
+/* Adicione esta regra ao seu CSS */
+.modal {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
     opacity: 1;
   }
 }

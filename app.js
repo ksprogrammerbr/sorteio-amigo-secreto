@@ -272,46 +272,81 @@ function atualizarListaResultados() {
 }
 
 function verificarResultado(nome) {
-  const password = prompt(`Por favor, digite a senha para ${nome}:`);
-  if (password === null || password.trim() === "") {
-    alert("Senha inválida!");
-    return;
-  }
+  // Create the modal
+  const modal = document.createElement("div");
+  modal.classList.add("modal");
+  modal.innerHTML = `
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <p>Por favor, digite a senha para ${nome}:</p>
+      <input type="password" id="passwordInput" class="input-name">
+      <div class="modal-buttons">
+        <button id="okButton" class="button-add">OK</button>
+        <button id="cancelButton" class="button-add">Cancelar</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
 
-  const amigo = amigos.find((amigo) => amigo.nome === nome);
+  // Get references to the elements
+  const passwordInput = document.getElementById("passwordInput");
+  const okButton = document.getElementById("okButton");
+  const cancelButton = document.getElementById("cancelButton");
+  const closeButton = modal.querySelector(".close-button");
 
-  if (amigo && password === amigo.senha) {
-    // Encontre para quem o amigo sorteado deve dar o presente
-    const sorteio = historicoSorteios.find((sorteio) => sorteio.de === nome);
-    const sorteadoPara = sorteio ? sorteio.para : "Ninguém (erro)"; // Tratamento para caso não encontre o sorteado
-
-    // Crie um elemento div para exibir o resultado
-    const resultadoDiv = document.createElement("div");
-    resultadoDiv.classList.add("resultado-popup");
-    resultadoDiv.innerHTML = `🎉 ${nome} -> ${sorteadoPara}! 🎉`;
-
-    // Adicionar classe para animação de piscar
-    resultadoDiv.classList.add("piscar");
-
-    // Adicionar o popup ao corpo do documento
-    document.body.appendChild(resultadoDiv);
-
-    // Definir um tempo para remover o popup após alguns segundos
-    setTimeout(() => {
-      document.body.removeChild(resultadoDiv);
-    }, 5000); // Remover após 5 segundos
-
-    // Adicionar a comemoração
-    dispararConfete();
-
-    // Reproduzir o áudio de celebração
-    if (audioCelebracao) {
-      audioCelebracao.play();
+  // Event listeners for the buttons
+  okButton.onclick = () => {
+    const password = passwordInput.value;
+    if (password === null || password.trim() === "") {
+      alert("Senha inválida!");
+      modal.remove();
+      return;
     }
-    exibirMensagemParabens(nome, sorteadoPara);
-  } else {
-    alert("Nome ou senha incorretos!");
-  }
+
+    const amigo = amigos.find((amigo) => amigo.nome === nome);
+
+    if (amigo && password === amigo.senha) {
+      // Find who the drawn friend should give the gift to
+      const sorteio = historicoSorteios.find((sorteio) => sorteio.de === nome);
+      const sorteadoPara = sorteio ? sorteio.para : "Ninguém (erro)"; // Treatment in case the drawn person is not found
+
+      // Create a div element to display the result
+      const resultadoDiv = document.createElement("div");
+      resultadoDiv.classList.add("resultado-popup");
+      resultadoDiv.innerHTML = `🎉 ${nome} -> ${sorteadoPara}! 🎉`;
+
+      // Add class for blinking animation
+      resultadoDiv.classList.add("piscar");
+
+      // Add the popup to the document body
+      document.body.appendChild(resultadoDiv);
+
+      // Set a time to remove the popup after a few seconds
+      setTimeout(() => {
+        document.body.removeChild(resultadoDiv);
+      }, 5000); // Remove after 5 seconds
+
+      // Add the celebration
+      dispararConfete();
+
+      // Play the celebration audio
+      if (audioCelebracao) {
+        audioCelebracao.play();
+      }
+      exibirMensagemParabens(nome, sorteadoPara);
+    } else {
+      alert("Nome ou senha incorretos!");
+    }
+    modal.remove();
+  };
+
+  cancelButton.onclick = () => {
+    modal.remove();
+  };
+
+  closeButton.onclick = () => {
+    modal.remove();
+  };
 }
 
 function exibirMensagemParabens(amigoSorteado, sorteadoPara) {
