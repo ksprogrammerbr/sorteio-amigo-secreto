@@ -285,28 +285,25 @@ function verificarResultado(nome) {
     const sorteio = historicoSorteios.find((sorteio) => sorteio.de === nome);
     const sorteadoPara = sorteio ? sorteio.para : "Ninguém (erro)"; // Tratamento para caso não encontre o sorteado
 
-    // Criar o popup customizado
-    const popupContainer = document.createElement("div");
-    popupContainer.classList.add("popup-container");
+    // Crie um elemento div para exibir o resultado
+    const resultadoDiv = document.createElement("div");
+    resultadoDiv.classList.add("resultado-popup");
+    resultadoDiv.innerHTML = `🎉 ${nome} -> ${sorteadoPara}! 🎉`;
 
-    const popupContent = document.createElement("div");
-    popupContent.classList.add("popup-content");
+    // Adicionar classe para animação de piscar
+    resultadoDiv.classList.add("piscar");
 
-    const closeBtn = document.createElement("span");
-    closeBtn.classList.add("close-btn");
-    closeBtn.innerHTML = "×";
-    closeBtn.onclick = () => popupContainer.remove();
+    // Adicionar o popup ao corpo do documento
+    document.body.appendChild(resultadoDiv);
 
-    const messageText = document.createElement("p");
-    messageText.textContent = `🎉 ${nome} -> ${sorteadoPara}! 🎉`;
-
-    popupContent.appendChild(closeBtn);
-    popupContent.appendChild(messageText);
-    popupContainer.appendChild(popupContent);
-    document.body.appendChild(popupContainer);
+    // Definir um tempo para remover o popup após alguns segundos
+    setTimeout(() => {
+      document.body.removeChild(resultadoDiv);
+    }, 5000); // Remover após 5 segundos
 
     // Adicionar a comemoração
     dispararConfete();
+
     // Reproduzir o áudio de celebração
     if (audioCelebracao) {
       audioCelebracao.play();
@@ -318,7 +315,7 @@ function verificarResultado(nome) {
 }
 
 function exibirMensagemParabens(amigoSorteado, sorteadoPara) {
-  const mensagem = `Parabéns ${amigoSorteado}, pode gastar seu dinheiro suado no presente para ${sorteadoPara}!`;
+  const mensagem = `Parabéns ${amigoSorteado}, pode gastar seu dinheiro suado para comprar o presente`;
 
   // Usar a API de síntese de fala
   const utterance = new SpeechSynthesisUtterance(mensagem);

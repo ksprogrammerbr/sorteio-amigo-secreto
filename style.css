@@ -1,8 +1,8 @@
 :root {
-  --color-primary: #caaaf3;
+  --color-primary: #0c9099;
   --color-secondary: #ebdec2;
   --color-tertiary: #c4c4c4;
-  --color-button: #8e3ceb;
+  --color-button: #1b96dd;
   --color-button-hover: #ff8787;
   --color-text: #444444;
   --color-white: #ffffff;
@@ -17,13 +17,15 @@
 }
 
 body {
-  min-height: 100vh; /* Adicione isso */
+  min-height: 100vh;
   margin: 0;
   background: var(--gradient-primary);
   font-family: "Inter", sans-serif;
   color: var(--color-text);
-  overflow-y: auto; /* Adicione isso */
-  overflow-x: hidden; /* esconde as barras de rolagem */
+  overflow-y: auto;
+  /* Adicione isso */
+  overflow-x: hidden;
+  /* esconde as barras de rolagem */
 }
 
 /* Estilos para o wrapper do conteúdo principal */
@@ -31,15 +33,19 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Alinhar o conteúdo ao topo */
+  justify-content: flex-start;
   min-height: 100vh;
   padding: 20px;
   box-sizing: border-box;
   position: relative;
   z-index: 2;
   /* Aumenta o z-index para ficar acima do fundo */
-  max-width: 900px; /* Adicione um max-width */
+  max-width: 900px;
+  /* Adicione um max-width */
   margin: 0 auto;
+  box-shadow: 0 10px 30px rgba(243, 238, 238, 0.952),
+    0 0 50px rgba(23, 230, 245, 0.5);
+  backdrop-filter: blur(10px);
 }
 
 /* Estilos para o conteúdo principal */
@@ -50,15 +56,17 @@ body {
   max-width: 800px;
   border-radius: 30px;
   overflow: hidden;
-  background-color: rgba(235, 222, 194, 0.3);
+  background-color: rgba(235, 222, 194, 0.1);
   /* Altere a transparência conforme necessário */
-
-  backdrop-filter: blur(15px); /* Adiciona o efeito de blur */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  /* Adiciona o efeito de blur */
+  box-shadow: 0 10px 30px rgba(151, 206, 243, 0.979);
   position: relative;
-  z-index: 3; /* Z-index ainda maior */
+  z-index: 3;
+  /* Z-index ainda maior */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.952), 0 0 50px rgba(73, 12, 153, 0.5);
-  border: 1px solid rgba(10, 201, 235, 0.966); /* Borda suave */
+  border: 1px solid rgba(6, 238, 255, 1);
+  /* Borda suave */
 }
 
 /* Banner */
@@ -70,12 +78,12 @@ body {
 .header-banner img {
   max-width: 100%;
   height: auto;
-  filter: drop-shadow(0 4px 12px rgba(169, 20, 189, 0.2));
+  filter: drop-shadow(0 4px 12px rgba(247, 186, 255, 0.507));
   transition: transform 0.3s ease;
 }
 
 .header-banner img:hover {
-  transform: scale(1.05);
+  transform: scale(1.09);
 }
 
 /* Seção de entrada */
@@ -85,7 +93,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden; /* Adicione isso */
+  overflow: hidden;
+  /* Adicione isso */
 }
 
 /* Títulos */
@@ -95,16 +104,17 @@ body {
   font-weight: 900;
   font-style: italic;
   color: var(--color-white);
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  text-shadow: 2px 2px 4px rgb(8, 8, 8);
   margin-bottom: 20px;
 }
 
 .section-title {
   font-size: 32px;
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--color-secondary);
   margin-bottom: 20px;
   text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
 }
 
 /* Contêineres de entrada e botão */
@@ -119,18 +129,23 @@ body {
 
 /* Estilos para os campos de entrada de nome e senha */
 .input-name {
-  width: 100%; /* Ocupa toda a largura disponível */
-  max-width: none; /* Remove a largura máxima */
-  min-width: 0; /* Garante que o elemento possa encolher abaixo de seu tamanho natural */
-  flex-grow: 1; /* Permite que os elementos se expandam e preencham o espaço disponível */
+  width: 100%;
+  /* Ocupa toda a largura disponível */
+  max-width: none;
+  /* Remove a largura máxima */
+  min-width: 0;
+  /* Garante que o elemento possa encolher abaixo de seu tamanho natural */
+  flex-grow: 1;
+  /* Permite que os elementos se expandam e preencham o espaço disponível */
   padding: 15px;
   border: 2px solid transparent;
   border-radius: 25px;
   font-size: 16px;
   background-color: #f8f9fa;
   transition: all 0.3s ease;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-  margin-right: 10px; /* Adiciona uma margem entre os campos e o botão */
+  box-shadow: inset 0 2px 4px rgba(7, 210, 236, 0.05);
+  margin-right: 10px;
+  /* Adiciona uma margem entre os campos e o botão */
   box-sizing: border-box;
 }
 
@@ -156,13 +171,13 @@ button {
   color: var(--color-white);
   border-radius: 25px;
   padding: 15px 30px;
-  box-shadow: 0 4px 8px rgba(70, 3, 146, 0.692);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.692);
 }
 
 .button-add:hover {
-  background-color: #2eb0e4;
+  background-color: #f742ee;
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(108, 99, 255, 0.3);
+  box-shadow: 0 6px 12px rgb(37, 195, 235);
 }
 
 /* Listas */
@@ -174,10 +189,13 @@ ul {
   width: 100%;
   padding: 0;
   box-sizing: border-box;
-  max-height: 200px; /* Ajuste a altura máxima conforme necessário */
-  overflow-y: auto; /* Adiciona a rolagem vertical quando necessário */
+  max-height: 200px;
+  /* Ajuste a altura máxima conforme necessário */
+  overflow-y: auto;
+  /* Adiciona a rolagem vertical quando necessário */
   overflow-x: hidden;
-  padding-right: 5px; /* Garante que a barra de rolagem não cubra o texto */
+  padding-right: 5px;
+  /* Garante que a barra de rolagem não cubra o texto */
 }
 
 .name-list li {
@@ -204,10 +222,15 @@ ul {
   width: 100%;
   padding: 15px 30px;
   color: var(--color-white);
-  background: linear-gradient(45deg, var(--color-button) 0%, #6cc0e0be 100%);
+  background: linear-gradient(
+    45deg,
+    var(--color-button-hover) 0%,
+    #bb6ce0e5 100%
+  );
   font-size: 18px;
   font-weight: 600;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.842);
+  border: 1px solid rgba(229, 177, 245, 0.966);
   position: relative;
   overflow: hidden;
   margin-bottom: 10px;
@@ -236,7 +259,7 @@ ul {
 
 .button-draw:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(231, 236, 236, 0.562);
+  box-shadow: 0 6px 20px rgba(7, 243, 243, 0.747);
 }
 
 .button-draw img {
@@ -255,22 +278,26 @@ ul {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(255, 255, 255, 0.2); /* Fundo transparente */
-  backdrop-filter: blur(10px); /* Efeito de blur */
-  padding: 40px; /* Aumenta o tamanho da caixa */
-  border-radius: 15px;
+  background-color: rgba(116, 11, 185, 0.781);
+  /* Fundo transparente */
+  backdrop-filter: blur(30px);
+  /* Efeito de blur */
+  padding: 40px;
+  /* Aumenta o tamanho da caixa */
+  border-radius: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   z-index: 10;
   text-align: center;
-  font-size: 1.2em; /* Aumenta a fonte */
+  font-size: 1.2em;
+  /* Aumenta a fonte */
 }
 
 #sorteandoTexto {
   font-size: 24px;
   font-weight: bold;
-  color: var(--color-primary);
+  color: var(--color-secondary);
   animation: pulse 1.5s infinite alternate;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  text-shadow: 1px 1px 2px rgba(1, 0, 2, 0.1);
 }
 
 @keyframes pulse {
@@ -290,7 +317,7 @@ ul {
   position: fixed;
   width: 10px;
   height: 10px;
-  background-color: rgb(0, 255, 106);
+  background-color: rgb(255, 0, 221);
   animation: confetti-fall 3s linear infinite;
 }
 
@@ -444,4 +471,52 @@ ul {
 
 .name-list li button {
   margin-left: 10px;
+}
+
+.resultado-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  text-align: center;
+  font-size: 2.2em;
+  font-weight: bold;
+  color: var(--color-button-hover);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.piscar {
+  animation: piscar 1s infinite;
+}
+
+@keyframes piscar {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
