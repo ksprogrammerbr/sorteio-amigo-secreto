@@ -9,10 +9,6 @@
   --gradient-primary: linear-gradient(135deg, #eb1ac8 0%, #300349 100%);
 }
 
-.footer {
-  text-align: center;
-}
-
 /* Estilos gerais */
 * {
   margin: 0;
@@ -403,10 +399,6 @@ ul {
   --color-text: #444444;
   --color-white: #ffffff;
   --gradient-primary: linear-gradient(135deg, #eb1ac8 0%, #300349 100%);
-}
-
-.footer {
-  text-align: center;
 }
 
 /* Estilos gerais */
@@ -860,10 +852,6 @@ ul {
   --color-text: #444444;
   --color-white: #ffffff;
   --gradient-primary: linear-gradient(135deg, #eb1ac8 0%, #300349 100%);
-}
-
-.footer {
-  text-align: center;
 }
 
 /* Estilos gerais */
@@ -1394,4 +1382,16 @@ ul {
   to {
     opacity: 1;
   }
+}
+
+.footer {
+  text-align: center;
+  padding: 20px; /* Adiciona espaço interno */
+  background-color: #ecbef0; /* Cor de fundo clara */
+  color: #000000; /* Cor do texto mais suave */
+  font-size: 14px; /* Tamanho da fonte menor */
+  border-top: 1px solid #ecbef0; /* Adiciona uma linha superior para separação */
+  --gradient-primary: linear-gradient(135deg, #eb1ac8 0%, #3094e6 100%);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 10px 30px rgba(15, 174, 214, 0.2); /* Sombras suaves */
 }
