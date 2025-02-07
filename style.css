@@ -18,14 +18,22 @@
 
 body {
   margin: 0;
+  /* background-size: cover;  */
   background: var(--gradient-primary);
-  font-family: "Inter", sans-serif;
+  color: #ffffff; /* Define a cor do texto */
+  font-family: "Inter", sans-serif; /* Define a fonte */
   color: var(--color-text);
   overflow-y: auto;
   overflow-x: hidden;
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
+  min-height: 100vh;
+  margin: 0;
+}
+
+body::-webkit-scrollbar {
+  display: none; /* Esconder a barra de rolagem no Webkit */
 }
 
 /* Estilos para o conteúdo principal */
@@ -36,7 +44,10 @@ body {
   /* max-height: 950px; */
   max-width: 800px;
   border-radius: 30px;
-  overflow: hidden;
+  overflow-y: scroll; /* Enable vertical scrolling */
+  padding-right: 10px; /* Add padding for the scrollbar width */
+  margin-right: -10px; /* Compensate padding by pulling the content back to the left */
+  overflow: hidden; /* Hide the scrollbar overflow */
   background-color: rgba(235, 222, 194, 0.1);
   backdrop-filter: blur(10px);
   box-shadow: 0 10px 30px rgba(151, 206, 243, 0.979);
@@ -44,9 +55,10 @@ body {
   z-index: 3;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.952), 0 0 50px rgba(73, 12, 153, 0.5);
   border: 1px solid rgba(6, 238, 255, 1);
-  margin: 50px auto 0; /* Centraliza horizontalmente e adiciona margem superior */
+  margin: 100px auto 0; /* Centraliza horizontalmente e adiciona margem superior */
   padding: 20px; /* Espaçamento interno opcional */
   margin-bottom: 0;
+  scale: 0.7;
 }
 
 /* Banner */
@@ -330,6 +342,7 @@ ul {
   position: relative;
   z-index: 3;
   overflow: hidden;
+  scale: 0.8;
 }
 
 /* The Close Button */
