@@ -319,7 +319,7 @@ function verificarResultado(nome) {
       // Create a div element to display the result
       const resultadoDiv = document.createElement("div");
       resultadoDiv.classList.add("resultado-popup");
-      resultadoDiv.innerHTML = `🎉 ${nome} -> ${sorteadoPara}! 🎉`;
+      resultadoDiv.innerHTML = `🎉 ${nome} ➡️ ${sorteadoPara}! 🎁`;
 
       // Add class for blinking animation
       resultadoDiv.classList.add("piscar");
@@ -414,7 +414,7 @@ function pararConfetti() {
 function baixarHistorico() {
   let texto = "Histórico de Sorteios:\n";
   historicoSorteios.forEach((sorteio) => {
-    texto += `${sorteio.de} -> ${sorteio.para}\n`;
+    texto += `${sorteio.de} ➡️ ${sorteio.para}\n`;
   });
 
   const blob = new Blob([texto], {
